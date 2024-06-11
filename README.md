@@ -21,7 +21,7 @@ TBC
 
 ## Play the Game
 
-You can play the game [here](https://arsalankhan21.github.io/vfc-internship-game).
+You can play the game [here](https://arsalankhan21.github.io/).
 
 ## Development
 
