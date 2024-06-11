@@ -22,6 +22,12 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+gameContainer.addEventListener("click", function() {
+    if (!isJumping && !isGameOver) {
+        jump();
+    }
+});
+
 function jump() {
     isJumping = true;
     let position = 0;
@@ -36,12 +42,12 @@ function jump() {
                     isJumping = false;
                 } else {
                     position -= 5;
-                    intern.style.bottom = (10 + position) + "px";
+                    intern.style.bottom = (0 + position) + "px";
                 }
             }, 20);
         } else {
             position += 5;
-            intern.style.bottom = (10 + position) + "px";
+            intern.style.bottom = (0 + position) + "px";
         }
     }, 20);
 }
@@ -118,13 +124,3 @@ function retryGame() {
     obstacles = [];
     startGame();
 }
-
-function startGame() {
-    document.getElementById("cover-page").style.display = "none";
-    gameContainer.style.display = "block";
-    createObstacle();
-    interval = setInterval(createObstacle, 2000);
-    moveObstacles();
-}
-
-document.getElementById("retry-btn").onclick = retryGame;
