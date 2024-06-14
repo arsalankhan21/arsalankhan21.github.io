@@ -39,7 +39,7 @@ body {
 
 #intern {
     position: absolute;
-    bottom: 0px;
+    bottom: 20px;
     left: 50px;
     width: 60px;
     height: 120px;
@@ -105,36 +105,4 @@ body {
     text-align: center;
     line-height: 30px;
     font-weight: bold;
-}
-
-/* Mobile styles */
-@media (max-width: 600px) {
-    #game-container {
-        width: 100%;
-        height: 50vh;
-        background-size: cover;
-    }
-
-    #intern {
-        width: 30px;
-        height: 60px;
-    }
-
-    #score {
-        font-size: 12px;
-    }
-
-    #message {
-        font-size: 18px;
-    }
-
-    #retry-btn {
-        font-size: 12px;
-    }
-
-    .obstacle {
-        width: 15px;
-        height: 15px;
-        line-height: 15px;
-    }
 }
