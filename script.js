@@ -14,9 +14,16 @@ let gravity = 0.9;
 let jumpHeight = 150;
 let obstacles = [];
 let interval;
+let totalTPBoxes = 15;
 
 document.addEventListener("keydown", function(event) {
     if (event.code === "Space" && !isJumping && !isGameOver) {
+        jump();
+    }
+});
+
+gameContainer.addEventListener("click", function() {
+    if (!isJumping && !isGameOver) {
         jump();
     }
 });
@@ -35,17 +42,21 @@ function jump() {
                     isJumping = false;
                 } else {
                     position -= 5;
-                    intern.style.bottom = (20 + position) + "px";
+                    intern.style.bottom = (0 + position) + "px";
                 }
             }, 20);
         } else {
             position += 5;
-            intern.style.bottom = (20 + position) + "px";
+            intern.style.bottom = (0 + position) + "px";
         }
     }, 20);
 }
 
 function createObstacle() {
+    if (score >= totalTPBoxes) {
+        createFinishLine();
+        return;
+    }
     let obstacle = document.createElement("div");
     obstacle.classList.add("obstacle");
     obstacle.innerText = "TP";
@@ -54,8 +65,16 @@ function createObstacle() {
     obstacles.push(obstacle);
 }
 
+function createFinishLine() {
+    finishLine.style.display = "block";
+}
+
 function moveObstacles() {
     let moveInterval = setInterval(() => {
+        if (isGameOver) {
+            clearInterval(moveInterval);
+            return;
+        }
         obstacles.forEach((obstacle, index) => {
             obstacle.style.left = (obstacle.offsetLeft - speed) + "px";
 
@@ -65,8 +84,9 @@ function moveObstacles() {
                 score++;
                 scoreDisplay.innerText = "Score: " + score;
 
-                if (score >= 15) {
+                if (score >= totalTPBoxes) {
                     finishLine.style.display = "block";
+                    finishLine.style.right = gameContainer.offsetLeft + gameContainer.offsetWidth + "px";
                     if (intern.offsetLeft + intern.offsetWidth > finishLine.offsetLeft) {
                         endGame("Congrats! You are eligible for your next internship!");
                     }
