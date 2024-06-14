@@ -124,3 +124,13 @@ function retryGame() {
     obstacles = [];
     startGame();
 }
+
+function startGame() {
+    document.getElementById("cover-page").style.display = "none";
+    gameContainer.style.display = "block";
+    createObstacle();
+    interval = setInterval(createObstacle, 2000);
+    moveObstacles();
+}
+
+document.getElementById("retry-btn").onclick = retryGame;
